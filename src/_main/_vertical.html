@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guardias CVC</title>
+  <link rel="stylesheet" href="../res/app.css">
+  <script type="module" src="../_main/index.js"></script>
+</head>
+
+<body class="main vertical">
+  <template id="infoTpl">
+    <div id="info">
+      <img id="infoImg">
+    </div>
+  </template>
+
+  <template id="mediaContentTpl">
+    <div id="mediaContent">
+      <div id="media"></div>
+      <div id="barProgress"><div></div></div>
+    </div>
+  </template>
+
+  <template id="guardiasTpl">
+    <div id="guardias">
+      <div class="header">
+        <h1>Servicios de guardia</h1>
+        <div class="infoGuardias">
+          <div id="hora"></div>
+          <div id="turno"><small>Turno</small> <span id="fecha"></span></div>
+        </div>
+      </div>
+      <ul id="guardiasList"></ul>
+    </div>
+  </template>
+
+  <template id="msgBox">
+    <h1 data-tpl="header"></h1>
+    <p data-tpl="texto"></p>
+  </template>
+</body>
+</html>

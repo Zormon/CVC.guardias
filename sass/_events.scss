@@ -1,0 +1,61 @@
+#eventMedia {
+    z-index: 3;
+    width: 101%;
+    height: 101%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: fill;
+    animation: circle-in .5s ease-out;
+}
+
+
+/* Transitions */
+
+#content {
+    &.fade          { animation: fade var(--transition-duration); }
+    &.zoom-in       { animation: zoom-in var(--transition-duration); }
+    &.zoom-out      { animation: zoom-out var(--transition-duration); }
+    &.slide-left    { animation: slide-left var(--transition-duration); }
+    &.slide-right   { animation: slide-right var(--transition-duration); }
+    &.slide-up      { animation: slide-up var(--transition-duration); }
+    &.slide-down    { animation: slide-down var(--transition-duration); }
+
+    &.out { animation-direction: reverse; }
+}
+
+
+
+.modalBox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 9;
+
+    background-color: rgba(0,0,0,0.6);
+
+    > div {
+        color: black;
+        background: white;
+        border: 4px solid red;
+        border-radius: 10px;
+        font-size: 1.2em;
+    }
+}
+
+body.vertical {
+    .modalBox > div {
+        width: 80%;
+        height: 25%;
+    }
+}
+body.horizontal {
+    .modalBox > div {
+        width: 40%;
+        height: 20%;
+    }
+}

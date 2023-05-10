@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Configuracion</title>
+    <script type="module" src="../_config/config.js"></script>
+    <link rel="stylesheet" href="../res/config.css">
+  </head>
+  <body class="config">
+    <nav id="configTabs">
+      <button data-tab="contenidos">Contenidos</button>
+      <button data-tab="guardias">Guardias</button>
+      <button data-tab="aspecto">Aspecto</button>
+      <button data-tab="aplicacion">Aplicación</button>
+    </nav>
+
+    <form id="config">
+      <div id="configTabsContent" class="tabsContent">
+        <!-- --------------  PESTAÑA CONTENIDOS  ------------------------>
+        <div id="tab-contenidos">
+          <div class="input grid">
+            <div class="g12">
+              <label for="transitionDuration">Duración de transiciones</label>
+              <input id="transitionDuration" type="number" min="0.1" max="3" step="0.1"> s
+            </div>
+          </div>
+        </div>
+        
+        <!-- --------------  PESTAÑA GUARDIAS  ------------------------>
+        <div id="tab-guardias">
+          <div class="input grid">
+            <div class="g12">
+              <input type="checkbox" id="geolocationQRs">
+              <label for="geolocationQRs">QRs de geolocalización</label>
+              <small>(Hasta 6 guardias)</small>
+            </div>
+            <div class="g12 input">
+              <label for="guardiasBGType">Interfaz</label>
+              <select id="guardiasBGType" class="wide">
+                <option value="0">Color sólido</option>
+                <option value="1">Degradado</option>
+                <option value="2">Imagen</option>
+              </select>
+            </div>
+            <div class="g12 input visGroup" data-groups="0,1">
+              <label for="guardiasBGColor1">Color</label>
+              <input type="color" id="guardiasBGColor1">
+              <input type="color" id="guardiasBGColor2" class="visGroup" data-groups="1">
+            </div>
+            <div class="g12 input visGroup" data-groups="2">
+              <label for="guardiasBGImg">Fondo de guardias <em>(imagen)</em></label>
+              <input type="file" id="guardiasBGImg" accept="image/png">
+            </div>
+          </div>
+        </div>
+
+        <!-- --------------  PESTAÑA ASPECTO  ------------------------>
+        <div id="tab-aspecto">
+          <div class="input">
+            <label for="interfaceType">Interfaz</label>
+            <select id="interfaceType" class="wide">
+              <option value="0">Vertical</option>
+              <option value="1">Horizontal</option>
+              <option value="2">Horizontal Único</option>
+            </select>
+          </div>
+
+          <div class="input">
+            <label for="interfaceOrder">Orden</label>
+            <select id="interfaceOrder" class="wide">
+              <option value="0">Info, contenidos, guardias</option>
+              <option value="1">Info, guardias, contenidos</option>
+              <option value="2">Guardias, info, contenidos</option>
+              <option value="3">Guardias, contenidos, info</option>
+              <option value="4">Contenidos, guardias, info</option>
+              <option value="5">Contenidos, info, guardias</option>
+            </select>
+          </div>
+
+          <fieldset>
+            <legend>Colores</legend>
+            <div class="input grid">
+              <div class="g4">Fondo</div>
+              <div class="g4">Primario</div>
+              <div class="g4">Secundario</div>
+              <div class="g4"><input type="color" id="appColor"></div>
+              <div class="g4"><input type="color" id="mainColor"></div>
+              <div class="g4"><input type="color" id="secondaryColor"></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Imágenes</legend>
+            <div class="input">
+              <label for="headerImg">Cabecera (Vert:1080x400, Horiz:600x1080</label>
+              <input type="file" id="headerImg" accept="image/png">
+            </div>
+          </fieldset>
+        </div>
+        
+
+
+        <!-- --------------  PESTAÑA APLICACIÓN  ------------------------>
+        <div id="tab-aplicacion">
+          <div class="input grid">
+            <input class="g10" type="text" class="wide" id="deployDir" readonly>
+            <button class="g2" id="deployDirExplore">...</button>
+          </div>
+
+          <span>Servidor (IP / Puerto)</span>
+          <div class="input grid">
+            <input class="g7 wide" type="text" id="serverIp" placeholder="127.0.0.1" required pattern="(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)_*(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)_*){3}">
+            <input class="g5 wide" type="number" id="serverPort" placeholder="3000" required maxlength="5">
+          </div>
+
+          <div class="input grid">
+            <input type="text" class="g10 wide" id="logsDir" readonly>
+            <button class="g2" id="logsDirExplore">...</button>
+          </div>
+
+          <fieldset id="window">
+            <legend>Ventana</legend>
+            <div class="input">
+              <select id="windowType" class="wide">
+                <option value="0">Pantalla completa única</option>
+                <option value="3">Sin bordes completa</option>
+                <option value="1">Sin bordes personalizada</option>
+                <option value="2">Flotante</option>
+              </select>
+            </div>
+  
+            <div class="visGroup" data-groups="1,2">
+              <span>Tamaño de la ventana (ancho / alto)</span>
+              <div class="input grid">
+                <input class="g6" type="number" id="windowSizeX" placeholder="1280" maxlength="4">
+                <input class="g6" type="number" id="windowSizeY" placeholder="720" maxlength="4">
+              </div>
+            </div>
+
+            <div class="visGroup" data-groups="1">
+              <span>Posición de la ventana (izquierda / arriba)</span>
+              <div class="input grid">
+                <input class="g6" type="number" id="windowPosX" placeholder="0" maxlength="4">
+                <input class="g6" type="number" id="windowPosY" placeholder="0" maxlength="4">
+              </div>
+            </div>
+
+            <div class="visGroup" data-groups="1,2">
+              <input type="checkbox" id="alwaysOnTop">
+              <label for="alwaysOnTop">Siempre visible</label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </form>
+
+    <button id="save">Guardar y reiniciar</button>
+  </body>
+</html>

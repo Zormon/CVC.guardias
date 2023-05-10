@@ -1,0 +1,15 @@
+{
+  "name": "guardias",
+  "productName": "guardias",
+  "version": "1.0.0",
+  "description": "Guardias digital",
+  "main": "src/main.js",
+  "author": "Comunicacion Visual Canarias",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "23.1.4"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}

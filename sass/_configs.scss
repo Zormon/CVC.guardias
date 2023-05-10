@@ -1,0 +1,175 @@
+body.config {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 40px auto 40px;
+    height: 100vh; width: 100%;
+    *:focus-visible { outline-color: #333; }
+
+    padding: .5em 1em;
+    box-sizing: border-box;
+
+    background-color: darken($light-color, 40%);
+
+    /* SERVER CONFIG */
+    &.server {
+        .cola {
+            .icon {
+                font-size: 1.5em;
+                padding: 0;
+            }
+        }
+    }
+
+
+    /* SECTION TABS */
+    
+    nav {
+        display: flex;
+        flex-direction: row;
+
+        button {
+            &.active { background-color: $light-color; }
+            &:not(.active):hover { background-color: darken($light-color, 10%); }
+
+            cursor: default;
+            border-radius: 4px 4px 0px 0px;
+            margin-right: 2px;
+            border: 0;
+        }
+    }
+
+    .tabsContent {
+        padding: 10px;
+        background-color: $light-color;
+
+        > div:not(.active)  { display: none ; }
+        > div.active        { display: block ; }
+    }
+
+    /* / SECTION TABS */
+
+
+    div.colas {
+        max-height: 450px;
+        overflow-y: auto;
+
+        .cola {
+            display: flex;
+            gap: .5em;
+            align-items: center;
+
+            input[type="text"], input[type="number"] {
+                width: 60%;
+            }
+        }
+    }
+
+    button {
+        padding: .4em 1.5em;
+        border: 2px solid darken($light-color, 20%);
+        background-color: darken($light-color, 20%);
+
+        &:hover {
+            border-color: darken($light-color, 40%);
+        }
+
+        &:active {
+            border-color: darken($light-color, 40%);
+            background-color: darken($light-color, 40%);
+        }
+    }
+
+    fieldset { margin-bottom: 1em; }
+    select { overflow: auto; }
+
+
+    div.input { 
+        position: relative; 
+        margin-bottom: 10px; 
+    }
+
+
+    input, select {
+        &.wide { width: 100%; }
+    }
+
+    option { font-size: 1.3em; }
+
+
+    input[type=number] {
+        &::-webkit-inner-spin-button, &::-webkit-outer-spin-button { 
+            opacity: 1 !important;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+        }
+    }
+
+    input[type="text"], input[type="number"], select { padding: 5px; }
+    input[type="text"], input[type="number"], input[type="color"], select {
+        margin: 5px 0 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+
+        &:hover { border-color: #666; }
+        &.icon { font-family: 'CVC Icons'; }
+    }
+
+    
+
+    /* Checkboxes */
+    input[type="checkbox"] { display: none; }
+    input[type="checkbox"] + label::before {
+        content: '';
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        border: 2px solid darken($light-color, 30%);
+        margin-right: 1em;
+        position: relative;
+        top: 0.2em;
+    }
+    input[type="checkbox"]:not(:disabled):hover + label::before { border-color: $dark-color; }
+    input[type="checkbox"]:not(:disabled):active + label::before { 
+        background-color: darken($light-color, 40%);
+        border-color: darken($light-color, 40%);
+    }
+    input[type="checkbox"]:checked + label::before {
+        background-color: $main-color;
+        border-color: $main-color; 
+    }
+
+    /* / Checkboxes */
+
+
+    input:disabled { 
+        background-color: lightgrey;
+        & + label::before { background-color: lightgrey !important; } /* Para los checkbox */
+     }
+}
+
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+
+    .g12,.g11,.g10,.g9,.g8,.g7,.g6,.g5,.g4,.g3,.g2,.g1 { width: 100%; }
+
+    .g12 { grid-column-end: span 12; }
+    .g11 { grid-column-end: span 11; }
+    .g10 { grid-column-end: span 10; }
+    .g9 { grid-column-end: span 9; }
+    .g8 { grid-column-end: span 8; }
+    .g7 { grid-column-end: span 7; }
+    .g6 { grid-column-end: span 6; }
+    .g5 { grid-column-end: span 5; }
+    .g4 { grid-column-end: span 4; }
+    .g3 { grid-column-end: span 3; }
+    .g2 { grid-column-end: span 2; }
+    .g1 { grid-column-end: span 1; }
+}
