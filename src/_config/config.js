@@ -70,8 +70,9 @@ $('logsDirExplore').onclick = (e)=> {
 
 // On Changes
 $('windowType').onchange = (e) => { displayGroup($('window'), e.currentTarget.value) }
-$('interfaceType').onchange = (e) => { displayGroup($('turnos'), e.currentTarget.value) }
+$('interfaceType').onchange = (e) => { displayGroup($('tab-aspecto'), e.currentTarget.value) }
 $('guardiasBGType').onchange = (e) => { displayGroup($('tab-guardias'), e.currentTarget.value) }
+
 /* *********************** / EVENTS *****************  */
 
 
