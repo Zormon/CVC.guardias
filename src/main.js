@@ -8,7 +8,7 @@ const isLinux = process.platform === "linux"
 const restartCommandShell =  `/home/cvc/scripts/appsCtrl restart ${appName} &`
 const {DEFAULT_CONFIG} = require('./exports.js')
 
-var appWin, configWin, configServerWin;
+var appWin, configWin;
 
 const CONFIG_FILE = `${app.getPath('userData')}/_custom/CONF.json`
 if ( !(global.CONF = loadConfigFile(CONFIG_FILE)) )      { global.CONF = DEFAULT_CONFIG }
@@ -33,10 +33,6 @@ if ( !(global.CONF = loadConfigFile(CONFIG_FILE)) )      { global.CONF = DEFAULT
           {label:'Ajustes', accelerator: 'CmdOrCtrl+E',  click() {
             if (configWin == null)  { config() } 
             else                    { configWin.focus() } 
-          }},
-          {label:'Ajustes del servidor', accelerator: 'CmdOrCtrl+S',  click() {
-            if (configServerWin == null)     { configServer() } 
-            else                             { configWin.focus() } 
           }},
           {type: 'separator'},
           {label:'Restaurar parámetros',     click() { restoreDialog() } }
@@ -142,7 +138,7 @@ if ( !(global.CONF = loadConfigFile(CONFIG_FILE)) )      { global.CONF = DEFAULT
 
     appWin.show()
     logs.log('MAIN','START','')
-    appWin.webContents.openDevTools()
+    //appWin.webContents.openDevTools()
   }
 
   function config() {
@@ -158,20 +154,6 @@ if ( !(global.CONF = loadConfigFile(CONFIG_FILE)) )      { global.CONF = DEFAULT
     
     configWin.on('closed', () => { configWin = null })
     //configWin.webContents.openDevTools()
-  }
-
-  function configServer() {
-    const winOptions = {
-      width: 400, height: 550, show:false, parent: appWin, modal:true, resizable:false, 
-      webPreferences: { spellcheck:false, preload: path.join(__dirname, "preload.js") }
-    }
-    configServerWin = new BrowserWindow(winOptions)
-    configServerWin.loadFile(`${__dirname}/_configServer/configServer.html`)
-    configServerWin.setMenu( null )
-    configServerWin.show()
-    
-    configServerWin.on('closed', () => { configServerWin = null })
-    //configServerWin.webContents.openDevTools()
   }
 
   function about() {
@@ -226,9 +208,6 @@ ipcMain.on('closeWindow', (e, arg) => {
   switch(arg) {
     case 'config':
       configWin.close()
-    break
-    case 'configServer':
-      configServerWin.close()
     break
   }
 })
