@@ -7,6 +7,7 @@ const logger = require('./log.js')
 const isLinux = process.platform === "linux"
 const restartCommandShell =  `/home/cvc/scripts/appsCtrl restart ${appName} &`
 const {DEFAULT_CONFIG} = require('./exports.js')
+const tpls = ['_vertical', '_horizontal', '_horizontalFull']
 
 var appWin, configWin;
 
@@ -122,14 +123,7 @@ if ( !(global.CONF = loadConfigFile(CONFIG_FILE)) )      { global.CONF = DEFAULT
       break
     }
 
-    let tpl
-    switch(CONF.interface.type) {
-      case 0: tpl = '_vertical'; break;         // Vertical
-      case 1: tpl = '_horizontal';   break;     // Horizontal
-      case 2: tpl = '_horizontalFull'; break;   // Horizontal solo guardias
-    }
-
-    appWin.loadFile(`${__dirname}/_main/${tpl}.html`)
+    appWin.loadFile(`${__dirname}/_main/${tpls[CONF.interface.type]}.html`)
     appWin.setTitle(appName)
     appWin.on('page-title-updated', (e)=>{ e.preventDefault()})
     Menu.setApplicationMenu( Menu.buildFromTemplate(MENU) )
