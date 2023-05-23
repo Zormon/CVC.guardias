@@ -10,46 +10,55 @@ const CONF = window.ipc.get.appConf()
 ======================================================================*/
 
   // Bloques
-  const infoTpl = $('infoTpl')
-  const mediaTpl = $('mediaContentTpl')
   const guardiasTpl = $('guardiasTpl')
   const bodyMain = $$('body.main')
 
-  switch (CONF.interface.order) {
-    case 0: // Info, contenidos, guardias
-      bodyMain.appendChild(infoTpl.content.cloneNode(true))
-      bodyMain.appendChild(mediaTpl.content.cloneNode(true))
-      bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
-    break;
-    case 1: // Info, guardias, contenidos
-      bodyMain.appendChild(infoTpl.content.cloneNode(true))
-      bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
-      bodyMain.appendChild(mediaTpl.content.cloneNode(true))
-    break;
-    case 2: // Guardias, info, contenidos
-      bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
-      bodyMain.appendChild(infoTpl.content.cloneNode(true))
-      bodyMain.appendChild(mediaTpl.content.cloneNode(true))
-    break;
-    case 3: // Guardias, contenidos, info
-      bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
-      bodyMain.appendChild(mediaTpl.content.cloneNode(true))
-      bodyMain.appendChild(infoTpl.content.cloneNode(true))
-    break;
-    case 4: // Contenidos, guardias, info
-      bodyMain.appendChild(mediaTpl.content.cloneNode(true))
-      bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
-      bodyMain.appendChild(infoTpl.content.cloneNode(true))
-    break;
-    case 5: // Contenidos, info, guardias
-      bodyMain.appendChild(mediaTpl.content.cloneNode(true))
-      bodyMain.appendChild(infoTpl.content.cloneNode(true))
-      bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
-    break;
+  if (CONF.interface.type != 2) {
+    const infoTpl = $('infoTpl')
+    const mediaTpl = $('mediaContentTpl')
   
+    switch (CONF.interface.order) {
+      case 0: // Info, contenidos, guardias
+        bodyMain.appendChild(infoTpl.content.cloneNode(true))
+        bodyMain.appendChild(mediaTpl.content.cloneNode(true))
+        bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
+      break;
+      case 1: // Info, guardias, contenidos
+        bodyMain.appendChild(infoTpl.content.cloneNode(true))
+        bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
+        bodyMain.appendChild(mediaTpl.content.cloneNode(true))
+      break;
+      case 2: // Guardias, info, contenidos
+        bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
+        bodyMain.appendChild(infoTpl.content.cloneNode(true))
+        bodyMain.appendChild(mediaTpl.content.cloneNode(true))
+      break;
+      case 3: // Guardias, contenidos, info
+        bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
+        bodyMain.appendChild(mediaTpl.content.cloneNode(true))
+        bodyMain.appendChild(infoTpl.content.cloneNode(true))
+      break;
+      case 4: // Contenidos, guardias, info
+        bodyMain.appendChild(mediaTpl.content.cloneNode(true))
+        bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
+        bodyMain.appendChild(infoTpl.content.cloneNode(true))
+      break;
+      case 5: // Contenidos, info, guardias
+        bodyMain.appendChild(mediaTpl.content.cloneNode(true))
+        bodyMain.appendChild(infoTpl.content.cloneNode(true))
+        bodyMain.appendChild(guardiasTpl.content.cloneNode(true))    
+      break;
+    
+    }
+    infoTpl.remove()
+    mediaTpl.remove()
+
+    $('infoImg').src = `file://${window.ipc.get.path('userData')}/_custom/headerImg.png`
+  } else {
+    bodyMain.appendChild(guardiasTpl.content.cloneNode(true))
   }
 
-  infoTpl.remove(); mediaTpl.remove(); guardiasTpl.remove()
+  guardiasTpl.remove()
 
   const css = new CSSStyleSheet()
 
@@ -65,16 +74,16 @@ const CONF = window.ipc.get.appConf()
   css.insertRule(` #guardias { background: url(file://${window.ipc.get.path('userData').replace(/\\/g,'/')}/_custom/guardiasBGImg.png) 0 0 no-repeat; background-size: 100% 100%} `)
 
   document.adoptedStyleSheets = [css]
-
-  $('infoImg').src = `file://${window.ipc.get.path('userData')}/_custom/headerImg.png`
-
+ 
 
 
 /*======================================================================
 ===========            CONTENIDO, SOCKET Y HORA            =============
 ======================================================================*/
-  var content = new Content(CONF.deployDir, false, window.ipc.logger, {volume: 0, transition_duration: CONF.media.transitionDuration})
-  content.next()
+  if (CONF.interface.type !== 2) {
+    var content = new Content(CONF.deployDir, false, window.ipc.logger, {volume: 0, transition_duration: CONF.media.transitionDuration})
+    content.next()
+  }
 
   var ws = new wSocket(CONF, content, window.ipc, true)
   ws.init()
@@ -91,11 +100,15 @@ const CONF = window.ipc.get.appConf()
 window.onkeyup = (e) => {
   switch (e.key) {
     case 'Enter':
-      window.ipc.logger.std({origin: 'USER', event: 'SKIP_CONTENT', message: ''})
-      content.next()
+      if (CONF.interface.type !== 2) {
+        window.ipc.logger.std({origin: 'USER', event: 'SKIP_CONTENT', message: ''})
+        content.next()
+      }
     break
     case 'p':
-      content.togglePause()
+      if (CONF.interface.type !== 2) {
+        content.togglePause()
+      }
     break
     case 'g':
       guardias.render()

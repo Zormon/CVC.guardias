@@ -3,27 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Canal CVC</title>
-  <link rel="stylesheet" href="../res/canalcorp.css">
+  <title>Guardias CVC</title>
+  <link rel="stylesheet" href="../res/app.css">
   <script type="module" src="../_main/index.js"></script>
 </head>
 
-<body class="main canalcorp">
-  <div id="media"></div>
+<body class="main horizontalFull">
+  <template id="guardiasTpl">
+    <div id="guardias">
+      <div class="header">
+        <h1>Servicios de guardia</h1>
+        <div class="infoGuardias">
+          <div id="hora"></div>
+          <div id="turno"><small>Turno</small> <span id="fecha"></span></div>
+        </div>
+      </div>
+      <ul id="guardiasList"></ul>
+    </div>
+  </template>
 
-  <div id="info">
-    <div id="barBG"></div>
-    <div id="barProgress"><div></div></div>
-    <div id="barBorder"></div>
-    <span id="time" class="item"></span>
-    <img id="midImg" class="item">
-    <img id="rightImg" class="item">
-  </div>
-
-  
   <template id="msgBox">
     <h1 data-tpl="header"></h1>
     <p data-tpl="texto"></p>
-</template>
+  </template>
 </body>
 </html>
